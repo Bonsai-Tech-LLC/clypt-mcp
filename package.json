@@ -1,0 +1,53 @@
+{
+  "name": "clypt-mcp",
+  "version": "1.0.0",
+  "description": "MCP Server for Clypt — AI-Powered Link Intelligence. Shorten links, view analytics, manage tags and folders from any AI assistant.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "clypt-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "clypt",
+    "link-shortener",
+    "url-shortener",
+    "analytics",
+    "ai",
+    "claude",
+    "chatgpt",
+    "cursor"
+  ],
+  "author": "Bonsai Tech LLC <mitul@bonsaitech.net>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bonsai-Tech-LLC/clypt-mcp.git"
+  },
+  "homepage": "https://clypt.io",
+  "bugs": {
+    "url": "https://github.com/Bonsai-Tech-LLC/clypt-mcp/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
