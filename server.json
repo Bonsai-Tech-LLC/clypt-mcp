@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.bonsai-tech-llc/clypt",
+  "name": "io.github.Bonsai-Tech-LLC/clypt",
   "description": "AI-native link intelligence — shorten, track, and manage links from any AI agent",
   "repository": {
     "url": "https://github.com/Bonsai-Tech-LLC/clypt-mcp",
