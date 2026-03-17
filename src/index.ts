@@ -17,6 +17,8 @@ import { registerManageTags } from "./tools/tags.js";
 import { registerManageFolders } from "./tools/folders.js";
 import { registerBulkShorten } from "./tools/bulk.js";
 import { registerDeleteLink } from "./tools/delete.js";
+import { registerAbTesting } from "./tools/ab-testing.js";
+import { registerAiQrCode } from "./tools/ai-qr.js";
 
 // Resources & Prompts
 import { registerResources } from "./resources.js";
@@ -28,7 +30,7 @@ async function main() {
 
   const server = new McpServer({
     name: "clypt-mcp",
-    version: "1.1.0",
+    version: "1.2.0",
   });
 
   // Register all tools
@@ -41,6 +43,8 @@ async function main() {
   registerManageFolders(server, client);
   registerBulkShorten(server, client);
   registerDeleteLink(server, client);
+  registerAbTesting(server, client);
+  registerAiQrCode(server, client);
 
   // Register resources
   registerResources(server, client, config);

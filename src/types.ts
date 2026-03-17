@@ -54,6 +54,53 @@ export interface ClyptFolder {
   createdAt: string;
 }
 
+// A/B Testing
+export interface ClyptAbTestVariant {
+  id: string;
+  label: string;
+  url: string;
+  weight: number;
+  clicks: number;
+  share: number;
+  isWinner: boolean;
+}
+
+export interface ClyptAbTestResult {
+  linkId: string;
+  isActive: boolean;
+  duration?: string;
+  startedAt?: string;
+  totalClicks: number;
+  variants: ClyptAbTestVariant[];
+  significance: {
+    method: string;
+    pValue: number;
+    confident: boolean;
+    minimumSampleReached: boolean;
+    estimatedClicksToSignificance: number | null;
+    recommendation: string;
+  } | null;
+}
+
+// AI Artistic QR Codes
+export interface ClyptAiQrCode {
+  id: string;
+  linkId: string;
+  status: "generating" | "ready" | "failed";
+  imageUrl?: string;
+  scanVerified?: boolean;
+  prompt?: string;
+  style?: string;
+  error?: string;
+  estimatedSeconds?: number;
+  remaining?: number;
+}
+
+export interface ClyptAiQrStyle {
+  id: string;
+  name: string;
+}
+
 export interface ApiError {
   error: string;
   message?: string;

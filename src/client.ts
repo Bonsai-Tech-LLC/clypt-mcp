@@ -145,4 +145,56 @@ export class ClyptClient {
   async listFolders() {
     return this.request<{ folders: any[] }>("GET", "/folders");
   }
+
+  // A/B Testing
+  async createAbTest(
+    linkId: string,
+    variants: { url: string; label?: string; weight: number }[]
+  ) {
+    return this.request<any>("POST", `/links/${linkId}/test`, { variants });
+  }
+
+  async getAbTestResults(linkId: string) {
+    return this.request<any>("GET", `/links/${linkId}/test`);
+  }
+
+  async updateAbTestWeights(
+    linkId: string,
+    variants: { id: string; weight: number }[]
+  ) {
+    return this.request<any>("PATCH", `/links/${linkId}/test`, { variants });
+  }
+
+  async endAbTest(linkId: string) {
+    return this.request<any>("DELETE", `/links/${linkId}/test`);
+  }
+
+  async promoteAbTestWinner(linkId: string, variantId: string) {
+    return this.request<any>("POST", `/links/${linkId}/test/promote`, {
+      variantId,
+    });
+  }
+
+  // AI Artistic QR Codes
+  async generateAiQr(data: {
+    linkId: string;
+    prompt?: string;
+    style?: string;
+    negativePrompt?: string;
+    controlWeight?: number;
+    seed?: number;
+  }) {
+    return this.request<any>("POST", "/qr/ai", data);
+  }
+
+  async getAiQrStatus(id: string) {
+    return this.request<any>("GET", `/qr/ai/${id}`);
+  }
+
+  async listAiQrStyles() {
+    return this.request<{ styles: { id: string; name: string }[] }>(
+      "GET",
+      "/qr/ai"
+    );
+  }
 }
