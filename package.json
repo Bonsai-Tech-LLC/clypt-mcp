@@ -1,7 +1,7 @@
 {
   "name": "clypt-mcp",
-  "version": "1.0.0",
-  "description": "MCP Server for Clypt — AI-Powered Link Intelligence. Shorten links, view analytics, manage tags and folders from any AI assistant.",
+  "version": "1.1.0",
+  "description": "MCP Server for Clypt â AI-Powered Link Intelligence. Shorten links, view analytics, manage tags and folders from any AI assistant.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -11,6 +11,7 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "start": "node dist/index.js",
+    "test": "tsx tests/integration.test.ts",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
     "typescript": "^5.7.0"
   },
   "files": [
