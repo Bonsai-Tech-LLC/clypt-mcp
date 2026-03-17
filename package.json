@@ -1,7 +1,7 @@
 {
   "name": "clypt-mcp",
   "version": "1.1.1",
-  "mcpName": "io.github.bonsai-tech-llc/clypt",
+  "mcpName": "io.github.Bonsai-Tech-LLC/clypt",
   "description": "MCP Server for Clypt — AI-Powered Link Intelligence. Shorten links, view analytics, manage tags and folders from any AI assistant.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
