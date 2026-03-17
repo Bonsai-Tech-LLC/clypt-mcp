@@ -18,13 +18,17 @@ import { registerManageFolders } from "./tools/folders.js";
 import { registerBulkShorten } from "./tools/bulk.js";
 import { registerDeleteLink } from "./tools/delete.js";
 
+// Resources & Prompts
+import { registerResources } from "./resources.js";
+import { registerPrompts } from "./prompts.js";
+
 async function main() {
   const config = loadConfig();
   const client = new ClyptClient(config);
 
   const server = new McpServer({
     name: "clypt-mcp",
-    version: "1.0.0",
+    version: "1.1.0",
   });
 
   // Register all tools
@@ -37,6 +41,12 @@ async function main() {
   registerManageFolders(server, client);
   registerBulkShorten(server, client);
   registerDeleteLink(server, client);
+
+  // Register resources
+  registerResources(server, client, config);
+
+  // Register prompts
+  registerPrompts(server);
 
   // Connect via stdio transport
   const transport = new StdioServerTransport();
