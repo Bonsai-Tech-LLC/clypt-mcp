@@ -1,0 +1,19 @@
+{
+  "name": "io.github.bonsai-tech-llc/clypt",
+  "description": "AI-native link intelligence for agents — shorten, brand, track analytics, generate QR codes, smart routing & more. Powered by Clypt.io",
+  "repository": {
+    "url": "https://github.com/Bonsai-Tech-LLC/clypt-mcp",
+    "source": "github"
+  },
+  "version": "1.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "clypt-mcp",
+      "version": "1.1.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
