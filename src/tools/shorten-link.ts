@@ -39,7 +39,7 @@ export function registerShortenLink(server: McpServer, client: ClyptClient) {
         folderId,
       });
 
-      const link = result.link;
+      const link = result;
       return {
         content: [
           {

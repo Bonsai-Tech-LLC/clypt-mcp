@@ -75,7 +75,7 @@ export class ClyptClient {
     password?: string;
     folderId?: string;
   }) {
-    return this.request<{ link: any }>("POST", "/links", data);
+    return this.request<any>("POST", "/links", data);
   }
 
   async listLinks(params?: {
