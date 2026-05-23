@@ -6,7 +6,7 @@ export function registerAbTesting(server: McpServer, client: ClyptClient) {
   // Create A/B Test
   server.tool(
     "create_ab_test",
-    "Create an A/B test on a link. Split traffic across 2–5 URL variants with configurable weights. Same visitor always sees the same variant (sticky bucketing). Requires Business plan.",
+    "Create an A/B test on a link. Split traffic across 2–5 URL variants with configurable weights. Same visitor always sees the same variant (cookie-based sticky bucketing). Edge-speed redirects (<50ms). Requires Pro plan or above.",
     {
       linkId: z.string().describe("The link ID to run the A/B test on"),
       variants: z

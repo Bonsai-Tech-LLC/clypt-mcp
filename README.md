@@ -117,6 +117,30 @@ Shorten multiple URLs at once (max 25).
 Delete a link by ID.
 - `linkId` (required) — Link ID to delete
 
+### `create_ab_test`
+Create an A/B split test on a link (Pro plan or above).
+- `linkId` (required) — The link ID to test
+- `variants` (required) — Array of 2–5 variants, each with `url`, optional `label`, and `weight` (weights must sum to 100)
+
+### `get_ab_test_results`
+Get A/B test results including per-variant clicks, statistical significance (chi-square), and winner recommendation.
+- `linkId` (required) — The link ID
+
+### `end_ab_test`
+End an active A/B test. The link reverts to its original URL. Test data is preserved.
+- `linkId` (required) — The link ID
+
+### `promote_ab_test_winner`
+Promote a winning variant as the sole destination URL and end the test.
+- `linkId` (required) — The link ID
+- `variantId` (required) — The variant ID to promote
+
+### `generate_ai_qr_code`
+Generate an AI artistic QR code using Stable Diffusion + ControlNet (Pro plan or above).
+- `linkId` (required) — The link ID to generate for
+- `prompt` — Text prompt describing the desired art style
+- `style` — Preset style: `watercolor`, `oil_painting`, `cyberpunk`, `minimal`, `japanese`, `nature`, `abstract`, `geometric`
+
 ## Example Usage
 
 Once configured, you can ask your AI assistant things like:
@@ -130,6 +154,12 @@ Once configured, you can ask your AI assistant things like:
 > "List all my links tagged 'campaign-q1'"
 
 > "Bulk shorten these 5 URLs for our newsletter"
+
+> "Set up a 50/50 A/B test on my landing page link with the new design vs the old one"
+
+> "Check the A/B test results — is there a winner yet?"
+
+> "Promote the winning variant and end the test"
 
 ## Development
 
