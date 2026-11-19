@@ -19,6 +19,7 @@ export function registerAbTesting(server: McpServer, client: ClyptClient) {
               .describe("Label (e.g., 'Control', 'Variant A')"),
             weight: z
               .number()
+              .int()
               .min(1)
               .max(99)
               .describe("Traffic percentage (all weights must sum to 100)"),

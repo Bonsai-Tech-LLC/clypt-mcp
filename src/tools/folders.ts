@@ -39,7 +39,7 @@ export function registerManageFolders(server: McpServer, client: ClyptClient) {
           content: [
             {
               type: "text" as const,
-              text: JSON.stringify(result.folder, null, 2),
+              text: JSON.stringify(result, null, 2),
             },
           ],
         };

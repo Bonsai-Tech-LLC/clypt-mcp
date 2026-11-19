@@ -37,7 +37,7 @@ export function registerManageTags(server: McpServer, client: ClyptClient) {
           content: [
             {
               type: "text" as const,
-              text: JSON.stringify(result.tag, null, 2),
+              text: JSON.stringify(result, null, 2),
             },
           ],
         };

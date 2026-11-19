@@ -39,7 +39,7 @@ Please:
           "Specific link ID to analyze. Omit for account-wide report."
         ),
       period: z
-        .enum(["7d", "30d", "90d", "all"])
+        .enum(["24h", "7d", "30d", "90d"])
         .optional()
         .describe("Time period (default: 30d)"),
     },

@@ -1,56 +1,104 @@
-// API Response types
+// API Response types. These mirror what /api/v1 returns: created and
+// fetched objects come back unwrapped (no { link } / { tag } / { folder }
+// envelope).
 
+export interface ClyptLinkTag {
+  id: string;
+  name: string;
+  color: string;
+}
+
+// formatLink() in the Clypt API
 export interface ClyptLink {
   id: string;
-  originalUrl: string;
   shortCode: string;
   shortUrl: string;
-  title?: string | null;
-  description?: string | null;
-  tags?: string[];
-  folderId?: string | null;
-  password?: boolean;
-  expiresAt?: string | null;
+  url: string; // destination URL
+  title: string | null;
   clickCount: number;
+  isActive: boolean;
+  expiresAt: string | null;
+  folderId: string | null;
+  customDomain: string | null;
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+  utmTerm: string | null;
+  utmContent: string | null;
+  tags: ClyptLinkTag[];
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ClyptAnalytics {
-  totalClicks: number;
-  uniqueClicks: number;
-  clicksByDate: { date: string; clicks: number }[];
-  topCountries: { country: string; clicks: number }[];
-  topDevices: { device: string; clicks: number }[];
-  topReferrers: { referrer: string; clicks: number }[];
-  topBrowsers: { browser: string; clicks: number }[];
+// GET /links
+export interface ClyptLinkList {
+  links: ClyptLink[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
 }
 
+export interface ClyptCount {
+  name: string;
+  count: number;
+}
+
+// GET /links/:id/analytics
+export interface ClyptAnalytics {
+  linkId: string;
+  shortCode: string;
+  url: string;
+  period: string;
+  totalClicks: number;
+  clicksInPeriod: number;
+  timeseries: { date: string; count: number }[];
+  topCountries: ClyptCount[];
+  topDevices: ClyptCount[];
+  topBrowsers: ClyptCount[];
+  topOS: ClyptCount[];
+  topReferrers: ClyptCount[];
+}
+
+// GET /analytics
 export interface ClyptDashboardStats {
+  period: string;
   totalLinks: number;
   totalClicks: number;
+  clicksInPeriod: number;
+  timeseries: { date: string; count: number }[];
   topLinks: {
     id: string;
     shortCode: string;
     shortUrl: string;
-    originalUrl: string;
+    url: string;
+    title: string | null;
     clickCount: number;
   }[];
+  topCountries: ClyptCount[];
+  topDevices: ClyptCount[];
+  topBrowsers: ClyptCount[];
+  topReferrers: ClyptCount[];
 }
 
+// POST /tags returns the tag record; GET /tags adds linkCount
 export interface ClyptTag {
   id: string;
   name: string;
-  color?: string | null;
-  _count?: { links: number };
+  color: string;
+  linkCount?: number;
   createdAt: string;
 }
 
+// POST /folders and GET /folders
 export interface ClyptFolder {
   id: string;
   name: string;
-  parentId?: string | null;
-  _count?: { links: number };
+  parentId: string | null;
+  linkCount: number;
+  subfolderCount: number;
   createdAt: string;
 }
 
@@ -104,4 +152,5 @@ export interface ClyptAiQrStyle {
 export interface ApiError {
   error: string;
   message?: string;
+  requiredScope?: string; // 403: the scope the API key lacks
 }

@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { ClyptClient } from "../client.js";
+import { missingTags, tagsNotAppliedWarning } from "../link-tags.js";
 
 export function registerShortenLink(server: McpServer, client: ClyptClient) {
   server.tool(
@@ -30,7 +31,7 @@ export function registerShortenLink(server: McpServer, client: ClyptClient) {
         .describe("Folder ID to organize the link into"),
     },
     async ({ url, slug, tags, expiresAt, password, folderId }) => {
-      const result = await client.createLink({
+      const link = await client.createLink({
         url,
         slug,
         tags,
@@ -39,7 +40,7 @@ export function registerShortenLink(server: McpServer, client: ClyptClient) {
         folderId,
       });
 
-      const link = result;
+      const notApplied = missingTags(tags, link);
       return {
         content: [
           {
@@ -48,11 +49,14 @@ export function registerShortenLink(server: McpServer, client: ClyptClient) {
               {
                 shortUrl: link.shortUrl,
                 shortCode: link.shortCode,
-                originalUrl: link.originalUrl,
+                originalUrl: link.url,
                 id: link.id,
                 createdAt: link.createdAt,
                 ...(link.expiresAt && { expiresAt: link.expiresAt }),
                 ...(link.tags?.length && { tags: link.tags }),
+                ...(notApplied.length > 0 && {
+                  warning: tagsNotAppliedWarning(notApplied, "link"),
+                }),
               },
               null,
               2

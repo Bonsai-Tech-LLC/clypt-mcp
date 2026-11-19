@@ -62,6 +62,14 @@ CLYPT_API_KEY=clypt_your_key_here clypt-mcp
 | `CLYPT_API_KEY` | Yes | - | Your Clypt API key |
 | `CLYPT_BASE_URL` | No | `https://clypt.io` | Custom API base URL |
 
+## API Key Scopes
+
+New API keys get `links:read` and `links:write` by default, which cover creating, listing and deleting links. Some tools need more scopes, which you choose when you create the key:
+
+- `get_link_analytics` and `get_dashboard_stats` need `analytics:read`
+- `manage_tags` needs `tags:read` to list and `tags:write` to create; `list_links` needs `tags:read` to filter by tag name
+- `manage_folders` needs `folders:read` to list and `folders:write` to create
+
 ## Available Tools
 
 ### `shorten_link`
@@ -74,16 +82,18 @@ Create a shortened Clypt link.
 - `folderId` — Folder to organize into
 
 ### `list_links`
-List your shortened links with search and filtering.
+List your shortened links with search and filtering, newest first.
 - `search` — Search by URL, title, or short code
-- `tag` — Filter by tag
-- `limit` — Results per page (max 100)
-- `offset` — Pagination offset
+- `tag` — Filter by tag name (looking up the name needs the `tags:read` scope)
+- `tagId` — Filter by tag ID (takes precedence over `tag`)
+- `limit` — Results per page (default 20, max 100)
+- `page` — Page number, starting at 1
+- `offset` — Deprecated: converted to a page, so it must be a multiple of `limit`
 
 ### `get_link_analytics`
-Get click analytics for a specific link.
+Get click analytics for a specific link. Needs the `analytics:read` scope.
 - `linkId` (required) — Link ID or short code
-- `period` — Time period: `7d`, `30d`, `90d`, or `all`
+- `period` — Time period: `24h`, `7d`, `30d` (default), or `90d`
 
 ### `get_dashboard_stats`
 Get high-level dashboard statistics (total links, clicks, top performers). No parameters required.
@@ -139,7 +149,7 @@ Promote a winning variant as the sole destination URL and end the test.
 Generate an AI artistic QR code using Stable Diffusion + ControlNet (Pro plan or above).
 - `linkId` (required) — The link ID to generate for
 - `prompt` — Text prompt describing the desired art style
-- `style` — Preset style: `watercolor`, `oil_painting`, `cyberpunk`, `minimal`, `japanese`, `nature`, `abstract`, `geometric`
+- `style` — Preset style: `watercolor`, `oil-painting`, `cyberpunk`, `minimal`, `japanese`, `nature`, `abstract`, `geometric`
 
 ## Example Usage
 

@@ -4,6 +4,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { loadConfig } from "./config.js";
 import { ClyptClient } from "./client.js";
+import { VERSION } from "./version.js";
 
 // Tools
 import { registerShortenLink } from "./tools/shorten-link.js";
@@ -30,7 +31,7 @@ async function main() {
 
   const server = new McpServer({
     name: "clypt-mcp",
-    version: "1.3.0",
+    version: VERSION,
   });
 
   // Register all tools
